@@ -11,6 +11,7 @@ import {
   // Link,
   Route,
 } from "react-router-dom";
+import Dashboard from "./MyComponents/Dashboard";
 
 
 function App() {
@@ -38,11 +39,11 @@ function App() {
       })
     );
   };
-
+  
   const addIt = (title1, desc1) => {
-    let sno1 = todos.length + 1;
+    // let sno1 = todos.length + 1;
     let todo1 = {
-      sno: sno1,
+      sno: nextSno,
       title: title1,
       desc: desc1,
       stat: false,
@@ -50,6 +51,7 @@ function App() {
       elapsedTime: 0
     };
     setTodos([...todos, todo1]);
+    setNextSno(nextSno + 1);
   };
 
   useEffect(() => {
@@ -83,13 +85,22 @@ function App() {
     return () => clearInterval(intervalId);
   }, []);
 
+  const [nextSno, setNextSno] = useState(() => {
+    // Load nextSno from localStorage if available
+    const savedNextSno = localStorage.getItem('nextSno');
+    return savedNextSno ? parseInt(savedNextSno, 10) : 1;
+  });
+
+  useEffect(() => {
+    // Save nextSno to localStorage whenever it changes
+    localStorage.setItem('nextSno', nextSno);
+  }, [nextSno]);
+
   return (
     <>
       <Header title="Todos List" />
       <Routes>
-        <Route
-          exact
-          path="/"
+        <Route exact path="/"
           element={
             <>
               <AddTodo addIt={addIt}></AddTodo>
@@ -153,14 +164,13 @@ function App() {
                   Incomplete
                 </button>
               </div>
-              <Todos
-                todo={filteredTodos}
-                onDelete={onDelete}
-                updateStat={updateStat}
-              />
+              <Todos todo={filteredTodos} onDelete={onDelete} updateStat={updateStat}/>
             </>
           }
         />
+        <Route exact path = "/Dashboard" element={
+          <Dashboard todos={todos}></Dashboard>
+        }/>
       </Routes>
       <Footer />
     </>
