@@ -1,0 +1,10 @@
+.only-class
+{
+    text-align: center;
+    width: 100%;
+    background-color: darkgray;
+    color: white;
+    margin-top: 100%;
+    /* top: 100vh; */
+    position: absolute;
+}
