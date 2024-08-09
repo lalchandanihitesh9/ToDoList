@@ -7,7 +7,6 @@ const AddTodo = (props) => {
     }
     const submit = () =>
     {
-        // e.preventDefault();
         let title1 = document.getElementById('title').value;
         let desc1 = document.getElementById('desc').value;
         if(!title1 || !desc1)

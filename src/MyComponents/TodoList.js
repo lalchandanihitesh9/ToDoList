@@ -2,21 +2,25 @@ import React from 'react'
 // import Todos from './Todos';
 
 export default function TodoList(props) {
-    // const onDelete = (sno) =>
-    // {
-    //     console.log("I am onDelete function of", sno);
-    //     // props.com.splice(sno-1,1);
-    //     // <Todos todo={props.com}></Todos>
-    // }
+    const onCompletion = (todo) =>
+    {
+
+      if(todo.stat===false)
+      {
+          props.updateStat(todo.sno, true);
+      }
+      else{
+        props.updateStat(todo.sno, false);
+      }
+
+    }
   return (
-    // <>
-    <div>
+    <div id='taskContainer' style={{backgroundColor: props.todo.stat ? 'green' : 'white'}}>
       <h4>{props.todo.title}</h4>
       <p>{props.todo.desc}</p>
-      <button className="btn btn-danger" onClick={() => props.onDelete(props.todo)}>Delete</button>
+      <button style={{padding : "5px", backgroundColor : "red", marginLeft :"4px", borderRadius: "20%"}} onClick={() => props.onDelete(props.todo)}>Delete</button>
+      <button style={{padding : "5px", backgroundColor : "lightgreen", marginLeft :"8px", borderRadius: "20%"}} onClick={()=> onCompletion(props.todo)}>Done</button>
       <hr/>
     </div>
-    //  <hr/>
-    // </> 
   )
 }

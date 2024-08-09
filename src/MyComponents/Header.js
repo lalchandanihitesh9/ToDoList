@@ -15,30 +15,18 @@ export default function Header(props) {
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
-            </li>
           </ul>
-          {
-            props.searchBar?
-            <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-success" type="submit">Search</button>
-            </form> : "no search bar"
-          }
         </div>
       </div>
     </nav>
-  );
+  )
 }
 Header.defaultProps = 
 {
   title : "Default Title",
-  // searchBar : true
 }
 
 Header.propTypes = 
 {
   title : propTypes.string,
-  searchBar : propTypes.bool.isRequired
 }

@@ -1,3 +1,6 @@
+# install node modules
+By using "npm install"
+
 ### `npm start`
 
 Runs the app in the development mode.\
