@@ -54,6 +54,32 @@ function App() {
     setNextSno(nextSno + 1);
   };
 
+  const addItApi = async () => {
+    try {
+      // Fetching a quote (for title) and its author (for description) from the API
+      const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${nextSno}`);
+
+      const data = await response.json();
+
+      const title1 = data.id;
+      const desc1 = data.title;
+
+      let todo1 = {
+        sno: nextSno,
+        title: title1,
+        desc: desc1,
+        stat: false,
+        startTime: Date.now(),
+        elapsedTime: 0
+      };
+  
+      setTodos([...todos, todo1]);
+      setNextSno(nextSno + 1);
+    } catch (error) {
+      console.error('Error fetching the quote:', error);
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -104,6 +130,7 @@ function App() {
           element={
             <>
               <AddTodo addIt={addIt}></AddTodo>
+              <button style={{padding : "5px", backgroundColor : "lightblue", margin :"8px"}} onClick={addItApi}>Add Quote</button>
               <h2 className="text-center">ToDo List</h2>
               <div
                 style={{
